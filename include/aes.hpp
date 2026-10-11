@@ -1,15 +1,12 @@
-#ifndef AES_HPP
-#define AES_HPP
+#pragma once
 
 #include <array>
 #include <cstdint>
 #include <cstdlib>
+#include "types.hpp"
 
 namespace AES
 {
-    using byte = std::uint8_t;
-    constexpr std::size_t BLOCK_SIZE = 16;
-    using Block = std::array<byte, BLOCK_SIZE>;
     using State = std::array<std::array<byte, 4>, 4>;
     using RoundKey = std::array<byte, 16>;
 
@@ -71,6 +68,7 @@ namespace AES
     public:
         using Key = std::array<byte, KeySize>;
 
+        AES() = default;
         explicit AES(const Key &key);
 
         Block encrypt(const Block &plain_text) const;
@@ -97,5 +95,3 @@ namespace AES
     using AES192 = AES<24>;
     using AES256 = AES<32>;
 }
-
-#endif
